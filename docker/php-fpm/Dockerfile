@@ -1,6 +1,6 @@
 # docker/php-fpm/Dockerfile
 
-FROM php:fpm-alpine
+FROM php:7.3-fpm-alpine
 
 RUN apk --update --no-cache add git \
     coreutils \
