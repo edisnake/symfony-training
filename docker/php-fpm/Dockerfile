@@ -4,6 +4,7 @@ FROM php:fpm-alpine
 
 RUN apk --update --no-cache add git \
     coreutils \
+    bash \
     php7-fpm \
     php7-apcu \
     php7-ctype \
