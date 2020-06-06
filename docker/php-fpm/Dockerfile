@@ -41,6 +41,9 @@ RUN echo "$(curl -sS https://composer.github.io/installer.sig) -" > composer-set
         && php composer-setup.php && rm composer-setup.php* \
         && chmod +x composer.phar && mv composer.phar /usr/bin/composer
 
+# Install the Symfony CLI helper
+RUN wget https://get.symfony.com/cli/installer -O - | bash; mv $HOME/.symfony/bin/symfony /usr/local/bin/symfony
+
 COPY symfony.ini /etc/php7/conf.d/
 COPY symfony.ini /etc/php7/cli/conf.d/
 COPY xdebug.ini  /etc/php7/conf.d/
