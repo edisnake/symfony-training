@@ -1,9 +1,10 @@
 # docker/php-fpm/Dockerfile
 
-FROM php:fpm-alpine
+FROM php:7.3-fpm-alpine
 
 RUN apk --update --no-cache add git \
     coreutils \
+    bash \
     php7-fpm \
     php7-apcu \
     php7-ctype \
@@ -39,6 +40,9 @@ RUN echo "$(curl -sS https://composer.github.io/installer.sig) -" > composer-set
         && curl -sS https://getcomposer.org/installer | tee composer-setup.php | sha384sum -c composer-setup.php.sig \
         && php composer-setup.php && rm composer-setup.php* \
         && chmod +x composer.phar && mv composer.phar /usr/bin/composer
+
+# Install the Symfony CLI helper
+RUN wget https://get.symfony.com/cli/installer -O - | bash; mv $HOME/.symfony/bin/symfony /usr/local/bin/symfony
 
 COPY symfony.ini /etc/php7/conf.d/
 COPY symfony.ini /etc/php7/cli/conf.d/
